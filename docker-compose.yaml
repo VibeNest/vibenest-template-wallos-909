@@ -13,11 +13,24 @@ services:
     - wallos-db:/var/www/html/db
     - wallos-logos:/var/www/html/images/uploads/logos
     healthcheck:
-      test: ["CMD", "curl", "-fsS", "http://127.0.0.1/health.php"]
+      test:
+      - "CMD"
+      - "curl"
+      - "-fsS"
+      - "http://127.0.0.1/health.php"
       interval: 30s
       timeout: 5s
       start_period: 30s
       retries: 5
+    deploy:
+      resources:
+        limits:
+          memory: '536870912'
+          cpus: 1
+        reservations: {}
+    mem_limit: 536870912
+    memswap_limit: 536870912
+    cpus: 1
 volumes:
-  wallos-db:
+  wallos-db: 
   wallos-logos:
